@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -77,16 +77,11 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
 # ZSH Autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 
@@ -140,10 +135,10 @@ typeset -A ZSH_HIGHLIGHT_PATTERNS
 # To have commands starting with `rm -rf` in red:
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
 ZSH_HIGHLIGHT_PATTERNS+=('sudo' 'fg=red,bold')
-ZSH_HIGHLIGHT_PATTERNS+=('dnf' 'fg=#78288C,bold')
-ZSH_HIGHLIGHT_PATTERNS+=('update' 'fg=green,bold')
-ZSH_HIGHLIGHT_PATTERNS+=('install *' 'fg=cyan,bold')
-ZSH_HIGHLIGHT_PATTERNS+=('search *' 'fg=#FF5733,bold')
+ZSH_HIGHLIGHT_PATTERNS+=('yay' 'fg=#78288C,bold')
+ZSH_HIGHLIGHT_PATTERNS+=('-Syu' 'fg=green,bold')
+ZSH_HIGHLIGHT_PATTERNS+=('-S *' 'fg=cyan,bold')
+ZSH_HIGHLIGHT_PATTERNS+=('-Ss' 'fg=#FF5733,bold')
 
 ZSH_HIGHLIGHT_PATTERNS+=('clone *' 'fg=#00575f,bold')
 ZSH_HIGHLIGHT_PATTERNS+=('git' 'fg=#F1502F,bold')
@@ -177,11 +172,12 @@ ZSH_HIGHLIGHT_STYLES[line]='bold'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias la='lsd -a'
-alias lla='lsd -la'
+alias ls='ls -la'
+alias ll='colorls -l -la'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+PATH=~/.console-ninja/.bin:$PATH
 # bun completions
 [ -s "/home/jerickdev/.bun/_bun" ] && source "/home/jerickdev/.bun/_bun"
 
@@ -189,4 +185,5 @@ alias lla='lsd -la'
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-PATH=~/.console-ninja/.bin:$PATH
+source $(dirname $(gem which colorls))/tab_complete.sh
+export PATH="/home/jerickdev/.local/share/gem/ruby/3.0.0/bin:$PATH"
